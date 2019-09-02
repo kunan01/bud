@@ -1,4 +1,7 @@
-<<<<<<< HEAD
+# bud 
+基于SpringCloud构建的学习入门项目，将持续更新。
+
+
 > 项目结构为 maven 多模块工程 下面为各模块简单介绍：
 1. bud 为父模块,不做代码上的操作
 2. eureka-server 为注册中心，所有服务均在该项目上注册，才能被发现
@@ -9,7 +12,3 @@
 7. bud-turbine 为集群监控（单节点监控可以在bud-util中查看）
 
 > ribbon 和 feign 服务调用示例，请参照 bud-util 里面的测试代码
-=======
-# bud
-基于学习SpringCloud构建的项目，将持续更新。
->>>>>>> 8e3bb0eca9094bfe3862b8c084f2f91214b3764c
