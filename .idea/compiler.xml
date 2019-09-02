@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bud-common" />
+        <module name="bud-gateway" />
+        <module name="bud-zipkin" />
+        <module name="bud-turbine" />
+        <module name="eureka-server" />
+        <module name="bud-util" />
+        <module name="bud-zuul" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bud-config" target="1.8" />
+      <module name="bud-feign" target="1.8" />
+      <module name="bud-ribbon" target="1.8" />
+      <module name="demo" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bud-common" options="-parameters" />
+      <module name="bud-config" options="-parameters" />
+      <module name="bud-feign" options="-parameters" />
+      <module name="bud-gateway" options="-parameters" />
+      <module name="bud-ribbon" options="-parameters" />
+      <module name="bud-turbine" options="-parameters" />
+      <module name="bud-util" options="-parameters" />
+      <module name="bud-zipkin" options="-parameters" />
+      <module name="bud-zuul" options="-parameters" />
+      <module name="demo" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+    </option>
+  </component>
+</project>

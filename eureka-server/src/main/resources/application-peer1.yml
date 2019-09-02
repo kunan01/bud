@@ -1,0 +1,16 @@
+server:
+  port: 8761
+
+spring:
+  profiles: peer1
+
+# eureka 多实例配置（高可用）
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true #以IP地址注册到服务中心，相互注册使用IP地址
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8771/eureka/

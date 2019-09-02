@@ -1,0 +1,19 @@
+server:
+  port: 8762
+
+spring:
+  application:
+    name: bud-common
+  zipkin:
+    base-url: http://localhost:8765/
+  sleuth:
+    sampler:
+      probability: 1
+
+eureka:
+  instance:
+    ip-address: true #以IP地址注册到服务中心
+    # instance-id: http://192.168.1.168:8762 #服务中心的信息显示（如果IP地址不显示的话，进行配置）
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8771/eureka/

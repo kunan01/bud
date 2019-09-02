@@ -1,0 +1,33 @@
+server:
+  port: 8766
+
+spring:
+  application:
+    name: bud-turbine
+
+eureka:
+  instance:
+    ip-address: true #以IP地址注册到服务中心
+    # instance-id: http://192.168.1.168:8762 #服务中心的信息显示（如果IP地址不显示的话，进行配置）
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+
+turbine:
+  app-config: bud-common,bud-util
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")
+  combine-host-port: true
+  instanceUrlSuffix:
+    default: actuator/hystrix.stream
+

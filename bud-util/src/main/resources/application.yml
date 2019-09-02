@@ -1,0 +1,32 @@
+server:
+  port: 8763
+
+spring:
+  application:
+    name: bud-util
+  zipkin:
+    base-url: http://loclahost:8765/
+  sleuth:
+    sampler:
+      probability: 1
+
+# eureka 配置
+eureka:
+  instance:
+    prefer-ip-address: true #以IP地址注册到服务中心
+    # instance-id: http://192.168.1.168:8763 #服务中心的信息显示（如果IP地址不显示的话，进行配置）
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8771/eureka/
+
+# feign 断路器功能开关
+feign:
+  hystrix:
+    enabled: true
+
+# Finchley 版本springboot2.0.x中actuator只暴露了info和health2个端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

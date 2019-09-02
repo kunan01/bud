@@ -1,0 +1,20 @@
+server:
+  port: 8760
+
+spring:
+  application:
+    name: bud-gateway
+# 以下路由方式和 java 代码配置方式二选一
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: bud-feign
+#        uri: http://localhost:8763/test/feignTest?name=bud-common
+#        predicates:
+#        - Path=/bud-feign
+#      - id: bud-ribbon
+#        uri: http://localhost:8763/test/ribbonTest?name=bud-common
+#        predicates:
+#        - Path=/bud-ribbon
+
+
