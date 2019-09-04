@@ -1,6 +1,11 @@
 server:
   port: 8760
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
 spring:
   application:
     name: bud-gateway
@@ -16,5 +21,4 @@ spring:
 #        uri: http://localhost:8763/test/ribbonTest?name=bud-common
 #        predicates:
 #        - Path=/bud-ribbon
-
 

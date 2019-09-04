@@ -19,6 +19,10 @@ public class RouteLocatorConfig {
                 )
                 .route("bud-ribbon", r -> r.path("/bud-ribbon")
                         .uri("http://localhost:8763/test/ribbonTest?name=bud-common")
-                ).build();
+                )
+                .route("bud-sys", r -> r.path("/bud-sys")
+                        .uri("http://localhost:8767/login")
+                )
+                .build();
     }
 }

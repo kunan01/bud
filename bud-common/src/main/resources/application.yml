@@ -1,15 +1,6 @@
 server:
   port: 8762
 
-spring:
-  application:
-    name: bud-common
-  zipkin:
-    base-url: http://localhost:8765/
-  sleuth:
-    sampler:
-      probability: 1
-
 eureka:
   instance:
     ip-address: true #以IP地址注册到服务中心
@@ -17,3 +8,12 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/,http://localhost:8771/eureka/
+
+spring:
+  application:
+    name: bud-common
+#  zipkin:
+#    base-url: http://localhost:8765/
+#  sleuth:
+#    sampler:
+#      probability: 1
