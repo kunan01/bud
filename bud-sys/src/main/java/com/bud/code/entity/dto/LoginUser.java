@@ -13,7 +13,7 @@ import java.util.Date;
  * 在线用户信息
  * </p>
  *
- * @Author scott
+ * @Author zsq
  * @since 2018-12-20
  */
 @Data
@@ -29,12 +29,12 @@ public class LoginUser {
 	/**
 	 * 登录人账号
 	 */
-	private String username;
+	private String userName;
 
 	/**
 	 * 登录人名字
 	 */
-	private String realname;
+	private String realName;
 
 	/**
 	 * 登录人密码

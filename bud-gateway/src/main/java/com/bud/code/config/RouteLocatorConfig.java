@@ -14,14 +14,14 @@ public class RouteLocatorConfig {
     @Resource
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("bud-feign", r -> r.path("/bud-feign")
+                .route("bud-feign", r -> r.path("/bud-feign/**")
                         .uri("http://localhost:8763/test/feignTest?name=bud-common")
                 )
-                .route("bud-ribbon", r -> r.path("/bud-ribbon")
-                        .uri("http://localhost:8763/test/ribbonTest?name=bud-common")
+                .route("bud-ribbon", r -> r.path("/bud-ribbon/**").filters(f -> f.stripPrefix(1))
+                        .uri("lb://bud-util/test/ribbonTest")
                 )
-                .route("bud-sys", r -> r.path("/bud-sys")
-                        .uri("http://localhost:8767/login")
+                .route("sys", r -> r.path("/sys/**")
+                        .uri("http://localhost:8767/sys/login")
                 )
                 .build();
     }

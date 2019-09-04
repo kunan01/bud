@@ -39,13 +39,13 @@ public class SysUser implements Serializable {
      * 登录账号
      */
     @Excel(name = "登录账号", width = 15)
-    private String username;
+    private String userName;
 
     /**
      * 真实姓名
      */
     @Excel(name = "真实姓名", width = 15)
-    private String realname;
+    private String realName;
 
     /**
      * 密码

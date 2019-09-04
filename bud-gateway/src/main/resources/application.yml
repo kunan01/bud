@@ -12,13 +12,22 @@ spring:
 # 以下路由方式和 java 代码配置方式二选一
 #  cloud:
 #    gateway:
+#      default-filters:
+#      discovery:
+#        locator:
+#          enabled: true
 #      routes:
 #      - id: bud-feign
-#        uri: http://localhost:8763/test/feignTest?name=bud-common
+#        uri: lb://bud-util/test/feignTest?name=bud-common
 #        predicates:
-#        - Path=/bud-feign
+#        - Path=/bud-feign/**
+#        filters:
+#        - StripPrefix= 1
 #      - id: bud-ribbon
 #        uri: http://localhost:8763/test/ribbonTest?name=bud-common
 #        predicates:
-#        - Path=/bud-ribbon
+#        - Path=/bud-ribbon/**
+#        filters:
+#        - StripPrefix= 1
+
 

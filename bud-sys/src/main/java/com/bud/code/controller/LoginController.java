@@ -41,20 +41,20 @@ public class LoginController {
     @PostMapping(value = "/login")
     public Result<JSONObject> login(@RequestBody SysLoginModel sysLoginModel) throws Exception {
         Result<JSONObject> result = new Result<JSONObject>();
-        String username = sysLoginModel.getUsername();
+        String userName = sysLoginModel.getUserName();
         String password = sysLoginModel.getPassword();
 
         //1. 校验用户是否有效
-        SysUser sysUser = sysUserService.getUserByName(username);
+        SysUser sysUser = sysUserService.getUserByName(userName);
         result = sysUserService.checkUserIsEffective(sysUser);
         if(!result.isSuccess()) {
             return result;
         }
 
         //2. 校验用户名或密码是否正确
-        String userpassword = PasswordUtil.encrypt(username, password, sysUser.getSalt());
-        String syspassword = sysUser.getPassword();
-        if (!syspassword.equals(userpassword)) {
+        String userPassword = PasswordUtil.encrypt(userName, password, sysUser.getSalt());
+        String sysPassword = sysUser.getPassword();
+        if (!sysPassword.equals(userPassword)) {
             result.error500("用户名或密码错误");
             return result;
         }
@@ -80,7 +80,7 @@ public class LoginController {
         String username = JwtUtil.getUsername(token);
         SysUser sysUser = sysUserService.getUserByName(username);
         if(sysUser!=null) {
-            log.info(" 用户名:  "+sysUser.getRealname()+",退出成功！ ");
+            log.info(" 用户名:  "+sysUser.getRealName()+",退出成功！ ");
             //清空用户Token缓存
             redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + token);
             //清空用户权限缓存：权限Perms和角色集合
@@ -100,10 +100,10 @@ public class LoginController {
      * @return
      */
     private Result<JSONObject> userInfo(SysUser sysUser, Result<JSONObject> result) {
-        String syspassword = sysUser.getPassword();
-        String username = sysUser.getUsername();
+        String sysPassword = sysUser.getPassword();
+        String userName = sysUser.getUserName();
         // 生成token
-        String token = JwtUtil.sign(username, syspassword);
+        String token = JwtUtil.sign(userName, sysPassword);
         redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
         // 设置超时时间
         redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME / 1000);
