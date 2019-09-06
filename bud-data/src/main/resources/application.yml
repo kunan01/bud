@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: bud-util
+    name: bud-data
   zipkin:
     base-url: http://loclahost:8765/
   sleuth:

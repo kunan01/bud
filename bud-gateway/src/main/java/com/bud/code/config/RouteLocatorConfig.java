@@ -15,12 +15,12 @@ public class RouteLocatorConfig {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("bud-feign", r -> r.path("/bud-feign/**")
-                        .uri("http://localhost:8763/test/feignTest?name=bud-common")
+                        .uri("http://localhost:8763/test/feignTest")
                 )
                 .route("bud-ribbon", r -> r.path("/bud-ribbon/**").filters(f -> f.stripPrefix(1))
-                        .uri("lb://bud-util/test/ribbonTest")
+                        .uri("lb://bud-data/test/ribbonTest")
                 )
-                .route("sys", r -> r.path("/sys/**")
+                .route("sys", r -> r.path("/sys/login")
                         .uri("http://localhost:8767/sys/login")
                 )
                 .build();

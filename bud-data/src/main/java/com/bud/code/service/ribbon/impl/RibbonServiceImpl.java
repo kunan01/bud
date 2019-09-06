@@ -15,7 +15,7 @@ public class RibbonServiceImpl implements IRibbonService {
     @Override
     @HystrixCommand(fallbackMethod = "serviceFallback")
     public String getServerInfo(String name) {
-        return restTemplate.getForObject("http://bud-common/test/getServerInfo?name="+name, String.class);
+        return restTemplate.getForObject("http://bud-data/test/getInfo?name="+name, String.class);
     }
 
     public String serviceFallback(String name) {

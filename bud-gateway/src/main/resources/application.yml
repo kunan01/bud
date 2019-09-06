@@ -5,11 +5,13 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
 
 spring:
   application:
     name: bud-gateway
-# 以下路由方式和 java 代码配置方式二选一
+  # 以下路由方式和 java 代码配置方式二选一
 #  cloud:
 #    gateway:
 #      default-filters:
@@ -17,17 +19,32 @@ spring:
 #        locator:
 #          enabled: true
 #      routes:
-#      - id: bud-feign
-#        uri: lb://bud-util/test/feignTest?name=bud-common
+#      - id: bud-data
+#        uri: lb://bud-data/test/feignTest?name=bud-common
 #        predicates:
 #        - Path=/bud-feign/**
 #        filters:
 #        - StripPrefix= 1
-#      - id: bud-ribbon
+#      - id: bud-data
 #        uri: http://localhost:8763/test/ribbonTest?name=bud-common
 #        predicates:
 #        - Path=/bud-ribbon/**
 #        filters:
 #        - StripPrefix= 1
+
+auth:
+  skip:
+    urls: /sys/login,/bud-data
+#    - /bud-data
+    # 有效时长 单位：d:天、h:小时、m:分钟、s:秒
+    effective-time: 1h
+
+# token黑名单 存储key
+jwt:
+  blacklist:
+    key:
+      format: JWT_BLACKLIST::%s
+  secret:
+    key: kunan01
 
 

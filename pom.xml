@@ -23,7 +23,6 @@
         <module>eureka-server</module>
         <module>bud-zuul</module>
         <module>bud-common</module>
-        <module>bud-util</module>
     </modules>
 
     <properties>

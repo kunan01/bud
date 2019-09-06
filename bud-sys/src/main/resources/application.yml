@@ -1,81 +1,82 @@
-server:
-  port: 8767
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+mybatis-plus:
+  global-config:
+    # å…³é—­MP3.0è‡ªå¸¦çš„banner
+    banner: false
+    db-config:
+      # ä¸»é”®ç±»å‹  0:"æ•°æ®åº“IDè‡ªå¢",1:"è¯¥ç±»å‹ä¸ºæœªè®¾ç½®ä¸»é”®ç±»å‹", 2:"ç”¨æˆ·è¾“å…¥ID",3:"å…¨å±€å”¯ä¸€ID (æ•°å­—ç±»å‹å”¯ä¸€ID)", 4:"å…¨å±€å”¯ä¸€ID UUID",5:"å­—ç¬¦ä¸²å…¨å±€å”¯ä¸€ID (idWorker çš„å­—ç¬¦ä¸²è¡¨ç¤º)"
+      id-type: 4
+      # é»˜è®¤æ•°æ®åº“è¡¨ä¸‹åˆ’çº¿å‘½å
+      table-underline: true
+  #configuration:
+    # è¿™ä¸ªé…ç½®ä¼šå°†æ‰§è¡Œçš„sqlæ‰“å°å‡ºæ¥ï¼Œåœ¨å¼€å‘æˆ–æµ‹è¯•çš„æ—¶å€™å¯ä»¥ç”¨
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/*Mapper.xml
+
+server:
+  port: 8767
 
 spring:
   application:
     name: bud-sys
   autoconfigure:
     exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
-  # Êı¾İ¿âÁ¬½ÓĞÅÏ¢
+  # æ•°æ®åº“è¿æ¥ä¿¡æ¯
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/jeecg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
-    # Á¬½Ó³ØµÄÅäÖÃĞÅÏ¢
-    # ³õÊ¼»¯´óĞ¡£¬×îĞ¡£¬×î´ó
+    # è¿æ¥æ± çš„é…ç½®ä¿¡æ¯
     druid:
-      initial-size: 10
-      min-idle: 5
-      max-active: 20
-      max-wait: 60000   # ÅäÖÃ»ñÈ¡Á¬½ÓµÈ´ı³¬Ê±µÄÊ±¼ä
-      time-between-eviction-runs-millis: 60000  # ÅäÖÃ¼ä¸ô¶à¾Ã²Å½øĞĞÒ»´Î¼ì²â£¬¼ì²âĞèÒª¹Ø±ÕµÄ¿ÕÏĞÁ¬½Ó£¬µ¥Î»ÊÇºÁÃë
-      min-evictable-idle-time-millis: 300000  # ÅäÖÃÒ»¸öÁ¬½ÓÔÚ³ØÖĞ×îĞ¡Éú´æµÄÊ±¼ä£¬µ¥Î»ÊÇºÁÃë
-      validation-query: SELECT 1 FROM DUAL  # Ğ£ÑéSQL£¬OracleÅäÖÃ(Èç¹û²»ÅäÖÃ£¬ÏÂÃæÈıÏîÔòÎŞĞ§)
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      pool-prepared-statements: true  # ´ò¿ªPSCache£¬²¢ÇÒÖ¸¶¨Ã¿¸öÁ¬½ÓÉÏPSCacheµÄ´óĞ¡
-      max-pool-prepared-statement-per-connection-size: 20
-      # filters: stat,wall,log4j  # ÅäÖÃ¼à¿ØÍ³¼ÆÀ¹½ØµÄfilters£¬È¥µôºó¼à¿Ø½çÃæsqlÎŞ·¨Í³¼Æ£¬'wall'ÓÃÓÚ·À»ğÇ½
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # Í¨¹ıconnectPropertiesÊôĞÔÀ´´ò¿ªmergeSql¹¦ÄÜ£»ÂıSQL¼ÇÂ¼
+      # filters: stat,wall,log4j  # é…ç½®ç›‘æ§ç»Ÿè®¡æ‹¦æˆªçš„filtersï¼Œå»æ‰åç›‘æ§ç•Œé¢sqlæ— æ³•ç»Ÿè®¡ï¼Œ'wall'ç”¨äºé˜²ç«å¢™
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       filter:
         stat:
           slow-sql-millis: 5000
       keep-alive: true
-  #redis ÅäÖÃ
+      # åˆå§‹åŒ–å¤§å°ï¼Œæœ€å°ï¼Œæœ€å¤§
+      initial-size: 10
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000 # é…ç½®è·å–è¿æ¥ç­‰å¾…è¶…æ—¶çš„æ—¶é—´
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000 # é…ç½®é—´éš”å¤šä¹…æ‰è¿›è¡Œä¸€æ¬¡æ£€æµ‹ï¼Œæ£€æµ‹éœ€è¦å…³é—­çš„ç©ºé—²è¿æ¥ï¼Œå•ä½æ˜¯æ¯«ç§’
+      min-evictable-idle-time-millis: 300000 # é…ç½®ä¸€ä¸ªè¿æ¥åœ¨æ± ä¸­æœ€å°ç”Ÿå­˜çš„æ—¶é—´ï¼Œå•ä½æ˜¯æ¯«ç§’
+      validation-query: SELECT 1 FROM DUAL # æ ¡éªŒSQLï¼ŒOracleé…ç½®(å¦‚æœä¸é…ç½®ï¼Œä¸‹é¢ä¸‰é¡¹åˆ™æ— æ•ˆ)
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+  # redis é…ç½®
   redis:
     database: 0
     host: 127.0.0.1
     lettuce:
       pool:
-        max-active: 8   #×î´óÁ¬½ÓÊı¾İ¿âÁ¬½ÓÊı,Éè 0 ÎªÃ»ÓĞÏŞÖÆ
-        max-idle: 8     #×î´óµÈ´ıÁ¬½ÓÖĞµÄÊıÁ¿,Éè 0 ÎªÃ»ÓĞÏŞÖÆ
-        max-wait: -1ms  #×î´ó½¨Á¢Á¬½ÓµÈ´ıÊ±¼ä¡£Èç¹û³¬¹ı´ËÊ±¼ä½«½Óµ½Òì³£¡£ÉèÎª-1±íÊ¾ÎŞÏŞÖÆ¡£
-        min-idle: 0     #×îĞ¡µÈ´ıÁ¬½ÓÖĞµÄÊıÁ¿,Éè 0 ÎªÃ»ÓĞÏŞÖÆ
+        max-active: 8 #æœ€å¤§è¿æ¥æ•°æ®åº“è¿æ¥æ•°,è®¾ 0 ä¸ºæ²¡æœ‰é™åˆ¶
+        max-idle: 8 #æœ€å¤§ç­‰å¾…è¿æ¥ä¸­çš„æ•°é‡,è®¾ 0 ä¸ºæ²¡æœ‰é™åˆ¶
+        max-wait: -1ms #æœ€å¤§å»ºç«‹è¿æ¥ç­‰å¾…æ—¶é—´ã€‚å¦‚æœè¶…è¿‡æ­¤æ—¶é—´å°†æ¥åˆ°å¼‚å¸¸ã€‚è®¾ä¸º-1è¡¨ç¤ºæ— é™åˆ¶ã€‚
+        min-idle: 0 #æœ€å°ç­‰å¾…è¿æ¥ä¸­çš„æ•°é‡,è®¾ 0 ä¸ºæ²¡æœ‰é™åˆ¶
       shutdown-timeout: 100ms
-    password: ''
+    password: ""
     port: 6379
 
-#mybatis plus ÉèÖÃ
-mybatis-plus:
-  mapper-locations: classpath*:mapper/*Mapper.xml
-  global-config:
-    # ¹Ø±ÕMP3.0×Ô´øµÄbanner
-    banner: false
-    db-config:
-      #Ö÷¼üÀàĞÍ  0:"Êı¾İ¿âID×ÔÔö",1:"¸ÃÀàĞÍÎªÎ´ÉèÖÃÖ÷¼üÀàĞÍ", 2:"ÓÃ»§ÊäÈëID",3:"È«¾ÖÎ¨Ò»ID (Êı×ÖÀàĞÍÎ¨Ò»ID)", 4:"È«¾ÖÎ¨Ò»ID UUID",5:"×Ö·û´®È«¾ÖÎ¨Ò»ID (idWorker µÄ×Ö·û´®±íÊ¾)";
-      id-type: 4
-      # Ä¬ÈÏÊı¾İ¿â±íÏÂ»®ÏßÃüÃû
-      table-underline: true
-    #configuration:
-    # Õâ¸öÅäÖÃ»á½«Ö´ĞĞµÄsql´òÓ¡³öÀ´£¬ÔÚ¿ª·¢»ò²âÊÔµÄÊ±ºò¿ÉÒÔÓÃ
-    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
-# Ö÷ÒªÓÃÓÚÉ¨ÃèÖ¸¶¨°üÏÂµÄrest½Ó¿ÚĞÅÏ¢swagger2Ê¹ÓÃ.
+# swaggeræ‰«æçš„è·¯å¾„
 WS:
   SCANBASEPACK: com.bud.code.controller
 
-# ¿ªÆô·şÎñapiËµÃ÷,²»¿ÉĞŞ¸Ä
 springfox:
   documentation:
     swagger:
       v2:
         path: /bud-sys/api-docs
 
-
+jwt:
+  secret:
+    key: kunan01

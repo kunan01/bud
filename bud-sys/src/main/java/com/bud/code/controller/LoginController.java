@@ -16,6 +16,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author scott
+ * @Author zsq
  * @since 2018-12-17
  */
 @Slf4j
@@ -36,10 +37,12 @@ public class LoginController {
     private ISysUserService sysUserService;
     @Autowired
     private RedisUtil redisUtil;
+    @Value("${jwt.secret.key}")
+    private String secretKey;
 
     @ApiOperation("登录接口")
-    @PostMapping(value = "/login")
-    public Result<JSONObject> login(@RequestBody SysLoginModel sysLoginModel) throws Exception {
+    @GetMapping(value = "/login")
+    public Result<JSONObject> login(SysLoginModel sysLoginModel) throws Exception {
         Result<JSONObject> result = new Result<JSONObject>();
         String userName = sysLoginModel.getUserName();
         String password = sysLoginModel.getPassword();
@@ -73,11 +76,11 @@ public class LoginController {
     @PostMapping(value = "/logout")
     public Result<Object> logout(HttpServletRequest request,HttpServletResponse response) {
         //用户退出逻辑
-        String token = request.getHeader(DefContants.X_ACCESS_TOKEN);
+        String token = request.getHeader(DefContants.AUTHORIZATION);
         if(oConvertUtils.isEmpty(token)) {
             return Result.error("退出登录失败！");
         }
-        String username = JwtUtil.getUsername(token);
+        String username = JwtUtil.getUserName(token);
         SysUser sysUser = sysUserService.getUserByName(username);
         if(sysUser!=null) {
             log.info(" 用户名:  "+sysUser.getRealName()+",退出成功！ ");
@@ -103,7 +106,7 @@ public class LoginController {
         String sysPassword = sysUser.getPassword();
         String userName = sysUser.getUserName();
         // 生成token
-        String token = JwtUtil.sign(userName, sysPassword);
+        String token = JwtUtil.sign(userName, secretKey);
         redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
         // 设置超时时间
         redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME / 1000);
