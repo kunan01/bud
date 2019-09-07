@@ -21,8 +21,10 @@
 
     <modules>
         <module>eureka-server</module>
-        <module>bud-zuul</module>
         <module>bud-common</module>
+        <module>bud-data</module>
+        <module>bud-gateway</module>
+        <module>bud-sys</module>
     </modules>
 
     <properties>
