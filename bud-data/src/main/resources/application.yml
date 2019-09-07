@@ -30,3 +30,11 @@ management:
     web:
       exposure:
         include: "*"
+
+# swagger扫描包路径
+WS:
+  SCANBASEPACK: com.bud.code.controller
+
+# gateway统一访问swagger地址
+GATEWAY:
+  HSOTNAME: http://localhost:8760/swagger-ui.html

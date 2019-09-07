@@ -1,4 +1,4 @@
-package com.bud.code.config;
+package com.bud.code.config.swagger;
 
 import com.bud.code.common.constant.DefContants;
 import org.springframework.beans.factory.annotation.Value;

@@ -12,25 +12,32 @@ spring:
   application:
     name: bud-gateway
   # 以下路由方式和 java 代码配置方式二选一
-#  cloud:
-#    gateway:
-#      default-filters:
-#      discovery:
-#        locator:
-#          enabled: true
-#      routes:
+  cloud:
+    gateway:
+      default-filters:
+      discovery:
+        locator:
+          enabled: true # gateway开启服务注册和发现，并且为每个服务创建一个router
+          lower-case-service-id: true # 请求路径上的服务名配置为小写
+      routes:
 #      - id: bud-data
-#        uri: lb://bud-data/test/feignTest?name=bud-common
+#        uri: lb://bud-data/test/feignTest
 #        predicates:
 #        - Path=/bud-feign/**
 #        filters:
 #        - StripPrefix= 1
-#      - id: bud-data
-#        uri: http://localhost:8763/test/ribbonTest?name=bud-common
-#        predicates:
-#        - Path=/bud-ribbon/**
-#        filters:
-#        - StripPrefix= 1
+      - id: bud-data
+        uri: lb://bud-data/test/ribbonTest
+        predicates:
+        - Path=/bud-ribbon/**
+        filters:
+        - StripPrefix= 1
+      - id: sys
+        uri: lb://bud-sys/sys/login
+        predicates:
+        - Path=/sys/login
+        filters:
+        - StripPrefix= 1
 
 auth:
   skip:
@@ -46,5 +53,3 @@ jwt:
       format: JWT_BLACKLIST::%s
   secret:
     key: kunan01
-
-

@@ -71,11 +71,9 @@ spring:
 WS:
   SCANBASEPACK: com.bud.code.controller
 
-springfox:
-  documentation:
-    swagger:
-      v2:
-        path: /bud-sys/api-docs
+# gateway统一访问swagger地址
+GATEWAY:
+  HSOTNAME: http://localhost:8760/swagger-ui.html
 
 jwt:
   secret:
