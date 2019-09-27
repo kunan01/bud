@@ -1,0 +1,32 @@
+server:
+  port: 8763
+spring:
+  application:
+    name: consul-provider
+  cloud:
+    inetutils:
+      #忽略指定网卡，支持正则表达式（这里使用正则表达式忽略所有虚拟机网卡）
+      ignored-interfaces: ['VMware.*']
+      #default-ip-address: 127.0.0.1
+#    client:
+#      ip-address: 127.0.0.1
+    consul:
+      host: 192.168.1.252
+      port: 8500
+      discovery:
+        #是否启用服务发现
+        enabled: true
+        #表示注册时使用ip而不是hostname
+        prefer-ip-address: true
+        #配置实例id
+        instance-id: ${spring.application.name}:${server.port}
+        #配置健康检查路径
+        health-check-path: /actuator/health
+        #配置健康检查时间间隔
+        health-check-interval: 15s
+        #健康检查失败多长时间取消注册
+        health-check-critical-timeout: 30s
+        #配置服务注册
+        register: true
+        #服务停止时取消注册，http://www.imooc.com/article/286883?block_id=tuijian_wz
+        deregister: true
