@@ -11,7 +11,7 @@ spring:
 #    client:
 #      ip-address: 127.0.0.1
     consul:
-      host: 192.168.1.252
+      host: 192.168.1.251
       port: 8500
       discovery:
         #是否启用服务发现
@@ -19,7 +19,7 @@ spring:
         #表示注册时使用ip而不是hostname
         prefer-ip-address: true
         #配置实例id
-        instance-id: ${spring.application.name}:${server.port}
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
         #配置健康检查路径
         health-check-path: /actuator/health
         #配置健康检查时间间隔

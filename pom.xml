@@ -20,18 +20,19 @@
     <description>bud Project Parent for Spring Boot</description>
 
     <modules>
-        <module>eureka-server</module>
-        <module>bud-common</module>
+        <!--<module>eureka-server</module>
         <module>bud-data</module>
         <module>bud-gateway</module>
-        <module>bud-sys</module>
+        <module>bud-sys</module>-->
+        <module>bud-common</module>
+        <module>bud-provider-consul</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
         <mybatis-plus.version>3.1.2</mybatis-plus.version>
         <fastjson.version>1.2.58</fastjson.version>
         <jwt.version>3.7.0</jwt.version>
@@ -47,10 +48,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--eureka-client-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
         </dependency>
         <!-- lombok插件-->
         <dependency>
@@ -83,7 +84,7 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
