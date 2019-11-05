@@ -26,6 +26,7 @@
         <module>bud-sys</module>-->
         <module>bud-common</module>
         <module>bud-provider-consul</module>
+        <module>bud-consumer-consul</module>
     </modules>
 
     <properties>

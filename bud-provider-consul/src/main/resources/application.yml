@@ -11,8 +11,8 @@ spring:
 #    client:
 #      ip-address: 127.0.0.1
     consul:
-      host: 192.168.1.251
-      port: 8500
+#      host: 192.168.1.251
+#      port: 8500
       discovery:
         #是否启用服务发现
         enabled: true

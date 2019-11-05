@@ -11,6 +11,7 @@ public class BudProviderConsulApplicationTests {
 
     @Test
     public void contextLoads() {
+        
     }
 
 }
